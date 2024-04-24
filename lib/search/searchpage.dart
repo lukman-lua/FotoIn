@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:fotoin/model/item_data.dart';
 import 'package:fotoin/model/item_model.dart';
 import 'package:fotoin/search/search_controller.dart';
@@ -26,59 +27,126 @@ class _SearchpageState extends State<Searchpage> {
       margin: const EdgeInsets.only(left: 8.0, top: 38.0,),
       child: ListView(
         children: [
-          Container(
-            margin: const EdgeInsets.only(right: 8.0,),
-            child: SearchAnchor(
-              isFullScreen: false,
-              viewBackgroundColor: Colors.white,
-              dividerColor: Colors.white,
-              viewSurfaceTintColor: Colors.white,
-              builder: (BuildContext context, SearchController controller) {
-                return SearchBar(
-                    controller: controller,
-                    shadowColor: MaterialStateProperty.all(
-                      Color(0x33B8B8FF),
-                    ),
-                    backgroundColor: MaterialStateProperty.all(Colors.white),
-                    surfaceTintColor: MaterialStateProperty.all(Colors.white),
-                    padding:  MaterialStateProperty.all<EdgeInsets>(
-                        EdgeInsets.symmetric(horizontal: 20.0)),
-                    hintText: "Search categories",
-                    hintStyle: MaterialStateProperty.all(
-                      const TextStyle(
-                        color: Color(0x7FB8B8FF),
-                        fontSize: 16,
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.w400,
-                        height: 0,
-                      ),
-                    ),
-                    onChanged: (_) {
-                      controller.openView();
-                    },
-                    onTap: () {
-                      controller.openView();
-                    },
-                    trailing: const [
-                      Icon(
-                        Icons.search,
-                        color: Color.fromRGBO(184, 184, 255, 1),
-                      ),
-                    ]);
+         Row(
+  children: [
+    Expanded(
+      child: Container(
+        margin: const EdgeInsets.only(right: 8.0),
+        child: SearchAnchor(
+          isFullScreen: false,
+          viewBackgroundColor: Colors.white,
+          dividerColor: Colors.white,
+          viewSurfaceTintColor: Colors.white,
+          builder: (BuildContext context, SearchController controller) {
+            return SearchBar(
+              controller: controller,
+              shadowColor: MaterialStateProperty.all(
+                Color(0x33B8B8FF),
+              ),
+              backgroundColor: MaterialStateProperty.all(Colors.white),
+              surfaceTintColor: MaterialStateProperty.all(Colors.white),
+              padding: MaterialStateProperty.all<EdgeInsets>(
+                EdgeInsets.symmetric(horizontal: 20.0),
+              ),
+              hintText: "Search categories",
+              hintStyle: MaterialStateProperty.all(
+                const TextStyle(
+                  color: Color(0x7FB8B8FF),
+                  fontSize: 16,
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w400,
+                  height: 0,
+                ),
+              ),
+              onChanged: (_) {
+                controller.openView();
               },
-              suggestionsBuilder: (BuildContext context, SearchController controller) {
-                return List<ListTile>.generate(5, (int index) {
-                  final String item = 'item $index';
-                  return ListTile(
-                    title: Text(item),
-                    onTap: () {
-                      controller.closeView(item);
-                    },
-                  );
-                });
+              onTap: () {
+                controller.openView();
               },
-            ),
-          ),
+              trailing: const [
+                Icon(
+                  Icons.search,
+                  color: Color.fromRGBO(184, 184, 255, 1),
+                ),
+              ],
+            );
+          },
+          suggestionsBuilder: (BuildContext context, SearchController controller) {
+            return List<ListTile>.generate(5, (int index) {
+              final String item = 'item $index';
+              return ListTile(
+                title: Text(item),
+                onTap: () {
+                  controller.closeView(item);
+                },
+              );
+            });
+          },
+        ),
+      ),
+    ),
+    IconButton(
+      onPressed: () {
+        showModalBottomSheet(
+          backgroundColor: Color.fromARGB(255, 237, 238, 248),
+          context: context, builder: (context){
+
+          return StatefulBuilder(builder: (BuildContext context, StateSetter setState){
+            return  SingleChildScrollView(
+               child: Padding(
+                 padding: const EdgeInsets.only(left: 10.0, right: 10),
+                 child: Column(
+                   children: [
+                    SizedBox(height: 10,),
+                    Align(
+                      alignment: Alignment.topCenter,
+                      child: Text('Filters', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),) ,
+                    ),
+                     Row(
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {},
+                          child: Text('Bandung',style: TextStyle(fontSize: 15, )),),
+                          SizedBox(width: 10,),
+                        ElevatedButton(
+                          onPressed: () {},
+                          child: Text('Jakarta',style: TextStyle(fontSize: 15, )),),
+                          SizedBox(width: 10,),
+                        ElevatedButton(
+                          onPressed: () {},
+                          child: Text('Bogor',style: TextStyle(fontSize: 15, )),),
+                      ],
+                    ),
+                     Row(
+                      children: [
+                         ElevatedButton(
+                          onPressed: () {},
+                          child: Text('Riau',style: TextStyle(fontSize: 15, )),),
+                          SizedBox(width: 10,),
+                        ElevatedButton(
+                          onPressed: () {},
+                          child: Text('Palembang',style: TextStyle(fontSize: 15, )),),
+                          SizedBox(width: 10,),
+                        ElevatedButton(
+                          onPressed: () {},
+                          child: Text('Lampung',style: TextStyle(fontSize: 15, )),),
+                          
+                      ],
+                    ),
+                      SizedBox(height: 50,),
+                   ],
+                   
+                 ),
+               )  );
+          });
+        });
+      },
+      icon: const Icon(Icons.equalizer_outlined),
+    )
+  ],
+),
+
           Container(
             width: 98,
             height: 28,
@@ -90,8 +158,8 @@ class _SearchpageState extends State<Searchpage> {
               ],
             ),
           ),
-          SizedBox(height: 16),
-          _buildFilteredCards(), 
+          const SizedBox(height: 16),
+          _buildFilteredCards(),
         ],
       ),
     );
@@ -137,36 +205,49 @@ class _SearchpageState extends State<Searchpage> {
   }
 
   Widget _buildFilteredCards() {
-    // Menghasilkan daftar kartu berdasarkan kategori yang dipilih
-    List<ItemModel> filteredItems = _searchController.items
-        .where((item) => _selectedCategory.isEmpty || item.category == _selectedCategory)
-        .toList();
+  // Menghasilkan daftar kartu berdasarkan kategori yang dipilih
+  List<ItemModel> filteredItems = _searchController.items
+      .where((item) => _selectedCategory.isEmpty || item.category == _selectedCategory)
+      .toList();
 
-    return GridView.builder(
-  shrinkWrap: true,
-  physics: NeverScrollableScrollPhysics(),
-  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-    crossAxisCount: 2, 
-    crossAxisSpacing: 8.0, 
-    mainAxisSpacing: 8.0, 
-  ),
-  itemCount: filteredItems.length,
-  itemBuilder: (context, index) {
-    final item = filteredItems[index];
-    return Card(
-      child: ListTile(
-        title: Text(item.category),
-        subtitle: Text(item.location),
-        onTap: () {
-          // Add logic here if needed
-        },
-      ),
-    );
-  },
-);
+  return ListView.builder(
+    shrinkWrap: true,
+    physics: NeverScrollableScrollPhysics(),
+    itemCount: filteredItems.length,
+    itemBuilder: (context, index) {
+      final item = filteredItems[index];
+      return Stack(
+        children: [
+          Card(
+            child: Image.asset(item.image),
+          ),
+          Positioned(
+            top: 120,
+            left: 30,
 
-  }
+            child: Text(item.name, style: TextStyle(fontSize: 25, fontFamily: 'Inter', fontWeight: FontWeight.bold, color: Colors.white),)),
+
+            Positioned(
+              top: 160,
+              left: 32,
+              child: Text(item.location, style: TextStyle(fontSize: 20, fontFamily: 'Inter', fontWeight: FontWeight.bold, color: Colors.white),)),
+        
+        
+            Positioned(
+              top: 160,
+              left: 260,
+              child: Text(item.price + 'K', style: TextStyle(fontSize: 20, fontFamily: 'Inter', fontWeight: FontWeight.bold, color: Colors.white),))
+        
+
+        ],
+      );
+    },
+  );
 }
+
+}
+
+
 
 
 
