@@ -12,7 +12,7 @@ class Route extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-        home: Home(),
+        home: Home (),
         initialRoute: '',
         routes: {
           '/inbox': (context) => Profile(),
