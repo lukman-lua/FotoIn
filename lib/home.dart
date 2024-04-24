@@ -17,9 +17,9 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int _currentIndex = 0;
 
-  Color unselectedColor = Color.fromRGBO(212, 212, 212, 1);
+  Color unselectedColor = const Color.fromRGBO(212, 212, 212, 1);
 
-  Color selectedColor = Color.fromRGBO(147, 129, 255, 1);
+  Color selectedColor = const Color.fromRGBO(147, 129, 255, 1);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class _HomeState extends State<Home> {
       appBar: _getAppBar(_currentIndex),
       body: _getPage(_currentIndex),
       bottomNavigationBar: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Colors.white,
           boxShadow: [
             BoxShadow(
@@ -157,11 +157,19 @@ class _HomeState extends State<Home> {
       case 4:
         return AppBar(
           centerTitle: true,
-          backgroundColor: Color(0xFFF8F7FF),
-          title: Image.asset(
-            'assets/appBar_icon.png',
-            height: 50,
+          backgroundColor: Colors.white,
+          title: const Text(
+            'Profile',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 16,
+              fontFamily: 'Inter',
+              fontWeight: FontWeight.w600,
+              height: 0.06,
+            ),
           ),
+          shadowColor: Color(0x14000000),
           toolbarHeight: 50,
         );
       default:
