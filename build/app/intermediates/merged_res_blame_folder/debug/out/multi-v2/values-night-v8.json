@@ -4,7 +4,7 @@
             "outputFile": "com.example.fotoin.app-mergeDebugResources-9:/values-night-v8/values-night-v8.xml",
             "map": [
                 {
-                    "source": "E:\\flutter\\fotoin\\Fotoin\\android\\app\\src\\main\\res\\values-night\\styles.xml",
+                    "source": "D:\\Windows\\Project\\Semhas\\FotoIn\\android\\app\\src\\main\\res\\values-night\\styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",

@@ -4,7 +4,7 @@
             "outputFile": "com.example.fotoin.app-mergeDebugResources-9:/values-as/values-as.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\eland\\.gradle\\caches\\transforms-3\\168e459aae59caaab0d2c703cf9d67ab\\transformed\\core-1.6.0\\res\\values-as\\values-as.xml",
+                    "source": "C:\\Users\\Dev\\.gradle\\caches\\transforms-3\\87955219ada9e4e421baba4d189bfc74\\transformed\\core-1.6.0\\res\\values-as\\values-as.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
